@@ -12,8 +12,14 @@ public class Player : MonoBehaviour
     Animator ani;
 
     // 총알
-    public GameObject bullet; // 배열로 수정 예정
+    //public GameObject bullet;
+    public GameObject[] bullet; // 배열로 수정
     public Transform pos = null;
+    public int power = 0;
+
+    [SerializeField]
+    private GameObject powerUp; // private를 인스펙터에서 사용하는 방법
+
     // 아이템
     // 레이저
 
@@ -57,7 +63,8 @@ public class Player : MonoBehaviour
         // 스페이스바 -> 총알 발사
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bullet, pos.position, Quaternion.identity);
+            //Instantiate(bullet, pos.position, Quaternion.identity);
+            Instantiate(bullet[power], pos.position, Quaternion.identity); // 배열로 수정
         }
 
         transform.Translate(moveX, moveY, 0);
@@ -76,6 +83,28 @@ public class Player : MonoBehaviour
         viewPos.x = Mathf.Clamp01(viewPos.x); // x값을 0 이상, 1 이하로 제한
         viewPos.y = Mathf.Clamp01(viewPos.y); // y값을 0 이상, 1 이하로 제한
         Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos); // 다시 월드 좌표 변환
-        transform.position = worldPos; //좌표 적용
+        transform.position = worldPos; // 좌표 적용
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            power += 1;
+
+            if (power >= 3)
+            {
+                power = 3;
+            }
+            else
+            {
+                // 파워업 시 UI 출력, 1초 후 제거
+                Destroy(Instantiate(powerUp, Vector3.zero, Quaternion.identity), 1); // 화면 중앙
+            }
+
+            // 아이템 획득 처리
+            Destroy(collision.gameObject);
+        }
+    }
+
 }

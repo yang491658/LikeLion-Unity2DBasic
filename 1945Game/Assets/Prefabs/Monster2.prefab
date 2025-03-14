@@ -133,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 4724319496349089257}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1089a6b3aaccbcf41989709e32d465e8, type: 2}
+  m_Controller: {fileID: 9100000, guid: c6c1fa19a803f6f4fa3d2a004e563dfb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   ms1: {fileID: 200094747262388584}
   ms2: {fileID: 8277383925976326057}
   bullet: {fileID: 7019758511002651438, guid: 57950ff277ac7f3478ff9c7804a5a02c, type: 3}
+  item: {fileID: 3409246937363808999, guid: 8b71031d92359344fa50d1845a4b446d, type: 3}
 --- !u!1 &8946184954159220377
 GameObject:
   m_ObjectHideFlags: 0

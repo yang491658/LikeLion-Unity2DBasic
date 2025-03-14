@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
     public Transform ms1;
     public Transform ms2;
     public GameObject bullet;
+    public GameObject item;
 
     void Start()
     {
@@ -37,5 +38,18 @@ public class Monster : MonoBehaviour
     {
         // 제거
         Destroy(gameObject);
+    }
+
+    // 총알에 따른 데미지 함수
+    public void Damage(int ATTACK)
+    {
+        ItemDrop();
+        Destroy(gameObject);
+    }
+
+    // 처치 시 아이템 생성
+    public void ItemDrop()
+    {
+        Instantiate(item, transform.position, Quaternion.identity);
     }
 }

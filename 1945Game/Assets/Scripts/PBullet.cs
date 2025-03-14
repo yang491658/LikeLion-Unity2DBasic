@@ -37,7 +37,19 @@ public class PBullet : MonoBehaviour
             Destroy(go, 1);
 
             // 몬스터 제거
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<Monster>().Damage(1); // 충돌 객체에서 컴포넌트를 가져와서 몬스터 클래스의 함수 사용
+
+            // 제거
+            Destroy(gameObject);
+        }
+
+        if (collision.CompareTag("Boss"))
+        {
+            // 이펙트 생성
+            GameObject go = Instantiate(effect, transform.position, Quaternion.identity);
+            // 1초 뒤 이펙트 제거
+            Destroy(go, 1);
 
             // 제거
             Destroy(gameObject);
