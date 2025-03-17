@@ -18,7 +18,7 @@ public class BackgroundRepeat : MonoBehaviour
     {
         // 새롭게 지정해줄 Offest 객체 선언
         Vector2 newOffset = thisMaterial.mainTextureOffset;
-        // y 값 = 현재 y 좌표 + 속도 + 프레임 보정
+        // y 값 = 현재 y 좌표 + 속도 * 프레임 보정
         newOffset.Set(0, newOffset.y + (scrollSpeed * Time.deltaTime));
         // 최종적으로 오프셋 값 지정
         thisMaterial.mainTextureOffset = newOffset;
