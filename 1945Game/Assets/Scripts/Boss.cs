@@ -11,10 +11,18 @@ public class Boss : MonoBehaviour
     public Transform pos1;
     public Transform pos2;
 
+
     void Start()
     {
+        Invoke("Hide", 3); // 3초 뒤 텍스트 숨김
         StartCoroutine(Shoot());
         StartCoroutine(Fire());
+    }
+
+    // 텍스트 숨기기
+    void Hide()
+    {
+        GameObject.Find("TextBossWarning").SetActive(false);
     }
 
     IEnumerator Shoot()
@@ -33,7 +41,7 @@ public class Boss : MonoBehaviour
     IEnumerator Fire()
     {
         // 공격 주기
-        float attackRate = .03f;
+        float attackRate = 3f;
         // 발사체 생성갯수
         int count = 30;
         // 발사체 사이의 각도
@@ -67,14 +75,14 @@ public class Boss : MonoBehaviour
         }
     }
 
-    //// 좌우 이동
-    //private void Update()
-    //{
-    //    if (transform.position.x >= 1)
-    //        flag *= -1;
-    //    if (transform.position.x <= -1)
-    //        flag *= -1;
+    // 좌우 이동
+    private void Update()
+    {
+        if (transform.position.x >= 1)
+            flag *= -1;
+        if (transform.position.x <= -1)
+            flag *= -1;
 
-    //    transform.Translate(flag * speed * Time.deltaTime, 0, 0);
-    //}
+        transform.Translate(flag * speed * Time.deltaTime, 0, 0);
+    }
 }

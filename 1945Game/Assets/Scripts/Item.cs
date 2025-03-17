@@ -12,9 +12,4 @@ public class Item : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         rig.AddForce(new Vector3(speed, speed, 0f));
     }
-
-    void Update()
-    {
-        
-    }
 }

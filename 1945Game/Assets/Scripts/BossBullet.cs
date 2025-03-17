@@ -5,11 +5,6 @@ public class BossBullet : MonoBehaviour
     public float Speed = 3f;
     Vector2 vec2 = Vector2.down;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         transform.Translate(vec2 * Speed * Time.deltaTime);

@@ -5,13 +5,9 @@ public class PBullet : MonoBehaviour
     // 속도
     public float speed = 5f;
     // 공격력
+    public int attack = 10;
     // 이펙트
     public GameObject effect;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -38,7 +34,8 @@ public class PBullet : MonoBehaviour
 
             // 몬스터 제거
             //Destroy(collision.gameObject);
-            collision.gameObject.GetComponent<Monster>().Damage(1); // 충돌 객체에서 컴포넌트를 가져와서 몬스터 클래스의 함수 사용
+            // 충돌 객체에서 컴포넌트를 가져와서 몬스터 클래스의 함수 사용
+            collision.gameObject.GetComponent<Monster>().Damage(attack);
 
             // 제거
             Destroy(gameObject);

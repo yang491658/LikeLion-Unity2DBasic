@@ -15,6 +15,17 @@ public class Spawn : MonoBehaviour
 
     public GameObject monster;
     public GameObject monster2;
+    public GameObject boss;
+
+    [SerializeField]
+    GameObject textBossWarning;
+
+    private void Awake()
+    {
+        textBossWarning.SetActive(false);
+
+        PoolManager.Instance.CreatePool(monster, 10); // 오브젝트 풀링
+    }
 
     void Start()
     {
@@ -37,7 +48,9 @@ public class Spawn : MonoBehaviour
             Vector2 r = new Vector2(x, transform.position.y);
 
             // 몬스터 생성
-            Instantiate(monster, r, Quaternion.identity);
+            //Instantiate(monster, r, Quaternion.identity);
+            GameObject enemy = PoolManager.Instance.Get(monster); // 오브젝트 풀링
+            enemy.transform.position = r;
         }
     }
 
@@ -53,7 +66,9 @@ public class Spawn : MonoBehaviour
             Vector2 r = new Vector2(x, transform.position.y);
 
             // 몬스터 생성
-            Instantiate(monster2, r, Quaternion.identity);
+            //Instantiate(monster2, r, Quaternion.identity);
+            GameObject enemy = PoolManager.Instance.Get(monster2); // 오브젝트 풀링
+            enemy.transform.position = r;
         }
     }
 
@@ -74,11 +89,11 @@ public class Spawn : MonoBehaviour
         swi2 = false;
         StopCoroutine(RandomSpawn2());
 
-        // 보스
-    }
+        // 보스 출현 텍스트
+        textBossWarning.SetActive(true);
 
-    void Update()
-    {
-
+        // 보스 생성
+        Vector3 pos = new Vector3(0, 3, 0);
+        GameObject go = Instantiate(boss, pos, Quaternion.identity);
     }
 }

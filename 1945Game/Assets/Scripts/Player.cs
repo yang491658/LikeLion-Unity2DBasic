@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     // 아이템
     // 레이저
+    public GameObject lazer;
+    public float gValue = 0;
 
     void Start()
     {
@@ -66,6 +68,25 @@ public class Player : MonoBehaviour
             //Instantiate(bullet, pos.position, Quaternion.identity);
             Instantiate(bullet[power], pos.position, Quaternion.identity); // 배열로 수정
         }
+        else if (Input.GetKey(KeyCode.Space))
+        {
+            gValue += Time.deltaTime;
+
+            if (gValue >= 1)
+            {
+                GameObject go = Instantiate(lazer, pos.position, Quaternion.identity);
+                Destroy(go, 1);
+                gValue = 0;
+            }
+        }
+        else
+        {
+            gValue -= Time.deltaTime;
+            if (gValue <= 0)
+            {
+                gValue = 0;
+            }
+        }
 
         transform.Translate(moveX, moveY, 0);
 
@@ -99,7 +120,8 @@ public class Player : MonoBehaviour
             else
             {
                 // 파워업 시 UI 출력, 1초 후 제거
-                Destroy(Instantiate(powerUp, Vector3.zero, Quaternion.identity), 1); // 화면 중앙
+                //Destroy(Instantiate(powerUp, Vector3.zero, Quaternion.identity), 1); // 화면 중앙
+                Destroy(Instantiate(powerUp, transform.position, Quaternion.identity), 1); // 화면 중앙
             }
 
             // 아이템 획득 처리

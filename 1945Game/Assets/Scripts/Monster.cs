@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    // 체력
+    public int hp = 100;
     // 속도
     public float speed = 1f;
     // 딜레이
@@ -37,14 +39,21 @@ public class Monster : MonoBehaviour
     private void OnBecameInvisible()
     {
         // 제거
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
     }
 
     // 총알에 따른 데미지 함수
     public void Damage(int ATTACK)
     {
-        ItemDrop();
-        Destroy(gameObject);
+        hp -= ATTACK;
+
+        if (hp <= 0)
+        {
+            ItemDrop();
+            //Destroy(gameObject);
+            PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
+        }
     }
 
     // 처치 시 아이템 생성

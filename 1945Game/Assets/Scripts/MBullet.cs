@@ -5,11 +5,6 @@ public class MBullet : MonoBehaviour
     // 속도
     public float speed = 4f;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         // 총알 발사 : 방향 * 속도 * 시간

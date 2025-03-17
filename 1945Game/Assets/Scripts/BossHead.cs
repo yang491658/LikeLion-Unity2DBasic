@@ -25,14 +25,4 @@ public class BossHead : MonoBehaviour
 
         go.GetComponent<BossBullet>().Move(new Vector2(0, -1));
     }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 }
