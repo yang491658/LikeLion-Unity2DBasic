@@ -39,8 +39,8 @@ public class Monster : MonoBehaviour
     private void OnBecameInvisible()
     {
         // 제거
-        //Destroy(gameObject);
-        PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
+        Destroy(gameObject);
+        //PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
     }
 
     // 총알에 따른 데미지 함수
@@ -51,8 +51,8 @@ public class Monster : MonoBehaviour
         if (hp <= 0)
         {
             ItemDrop();
-            //Destroy(gameObject);
-            PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
+            Destroy(gameObject);
+            //PoolManager.Instance.Return(gameObject); // 오브젝트 풀링
         }
     }
 

@@ -24,7 +24,7 @@ public class Spawn : MonoBehaviour
     {
         textBossWarning.SetActive(false);
 
-        PoolManager.Instance.CreatePool(monster, 10); // 오브젝트 풀링
+        //PoolManager.Instance.CreatePool(monster, 10); // 오브젝트 풀링
     }
 
     void Start()
@@ -48,9 +48,9 @@ public class Spawn : MonoBehaviour
             Vector2 r = new Vector2(x, transform.position.y);
 
             // 몬스터 생성
-            //Instantiate(monster, r, Quaternion.identity);
-            GameObject enemy = PoolManager.Instance.Get(monster); // 오브젝트 풀링
-            enemy.transform.position = r;
+            Instantiate(monster, r, Quaternion.identity);
+            //GameObject enemy = PoolManager.Instance.Get(monster); // 오브젝트 풀링
+            //enemy.transform.position = r;
         }
     }
 
@@ -66,9 +66,9 @@ public class Spawn : MonoBehaviour
             Vector2 r = new Vector2(x, transform.position.y);
 
             // 몬스터 생성
-            //Instantiate(monster2, r, Quaternion.identity);
-            GameObject enemy = PoolManager.Instance.Get(monster2); // 오브젝트 풀링
-            enemy.transform.position = r;
+            Instantiate(monster2, r, Quaternion.identity);
+            //GameObject enemy = PoolManager.Instance.Get(monster2); // 오브젝트 풀링
+            //enemy.transform.position = r;
         }
     }
 

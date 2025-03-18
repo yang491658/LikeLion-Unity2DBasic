@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject powerUp; // private를 인스펙터에서 사용하는 방법
 
-    // 아이템
     // 레이저
     public GameObject lazer;
     public float gValue = 0;
+
+    // 이미지 UI
+    public Image gage; 
 
     void Start()
     {
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.Space))
         {
             gValue += Time.deltaTime;
+            gage.fillAmount = gValue;
 
             if (gValue >= 1)
             {
@@ -86,6 +90,8 @@ public class Player : MonoBehaviour
             {
                 gValue = 0;
             }
+
+            gage.fillAmount = gValue;
         }
 
         transform.Translate(moveX, moveY, 0);
