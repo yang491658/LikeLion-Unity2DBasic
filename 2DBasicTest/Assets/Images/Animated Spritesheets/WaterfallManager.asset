@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: WaterfallManager
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 3200881345511937292, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
+  m_DefaultSprite: {fileID: -1973939264, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: 3200881345511937292, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: 1227957421, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: -818508412, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: 132215207, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: 1061297089, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
+    - {fileID: -1973939264, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: 1817982803, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: 1645618508, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: 510963389, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: -1045760431, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
     m_GameObject: {fileID: 0}
-    m_MinAnimationSpeed: 2
-    m_MaxAnimationSpeed: 2
+    m_MinAnimationSpeed: 20
+    m_MaxAnimationSpeed: 20
     m_PerlinScale: 0.5
     m_Output: 2
     m_ColliderType: 1
@@ -36,14 +36,14 @@ MonoBehaviour:
     m_RuleTransform: 0
   - m_Id: 1
     m_Sprites:
-    - {fileID: -594879619, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: -295032793, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: -1780569791, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: -983014133, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-    - {fileID: -594799554, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
+    - {fileID: -137179188, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: -189823098, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: -1015749323, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: 1381038438, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+    - {fileID: 776263636, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
     m_GameObject: {fileID: 0}
-    m_MinAnimationSpeed: 2
-    m_MaxAnimationSpeed: 2
+    m_MinAnimationSpeed: 20
+    m_MaxAnimationSpeed: 20
     m_PerlinScale: 0.5
     m_Output: 2
     m_ColliderType: 1

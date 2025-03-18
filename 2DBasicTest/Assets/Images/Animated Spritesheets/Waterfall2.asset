@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: Waterfall 2
+  m_Name: Waterfall2
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -594879619, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: -295032793, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: -1780569791, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: -983014133, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: -594799554, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: -137179188, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: -189823098, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: -1015749323, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: 1381038438, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: 776263636, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  m_MinSpeed: 2
+  m_MaxSpeed: 2
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

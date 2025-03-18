@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Waterfall
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 3200881345511937292, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: 1227957421, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: -818508412, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: 132215207, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  - {fileID: 1061297089, guid: 367e4ca73bb5f4f42b331fb002330151, type: 3}
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  - {fileID: -1973939264, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: 1817982803, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: 1645618508, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: 510963389, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  - {fileID: -1045760431, guid: a3ba8ee4fce1692429d33cdf61c66cc0, type: 3}
+  m_MinSpeed: 2
+  m_MaxSpeed: 2
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0
