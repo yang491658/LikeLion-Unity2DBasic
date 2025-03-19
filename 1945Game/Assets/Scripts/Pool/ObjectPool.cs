@@ -20,7 +20,6 @@ using UnityEngine;
 
 public class ObjectPool
 {
-
     // 풀링할 프리팹
     private GameObject prefab;
 

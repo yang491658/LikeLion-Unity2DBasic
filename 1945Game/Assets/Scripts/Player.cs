@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
             {
                 // 파워업 시 UI 출력, 1초 후 제거
                 //Destroy(Instantiate(powerUp, Vector3.zero, Quaternion.identity), 1); // 화면 중앙
-                Destroy(Instantiate(powerUp, transform.position, Quaternion.identity), 1); // 화면 중앙
+                Destroy(Instantiate(powerUp, transform.position, Quaternion.identity), 1); // 회득 위치
             }
 
             // 아이템 획득 처리

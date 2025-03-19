@@ -73,7 +73,7 @@ public class Boss : MonoBehaviour
             // 발사체가 생성되는 시작 각도 설정을 위한 변수
             weightAngle += 1;
 
-            //3초마다 미사일 발사
+            // 3초마다 미사일 발사
             yield return new WaitForSeconds(attackRate);
         }
     }
