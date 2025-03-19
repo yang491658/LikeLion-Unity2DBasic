@@ -1,0 +1,24 @@
+using Unity.Cinemachine;
+using UnityEngine;
+
+public class CameraShake : MonoBehaviour
+{
+    public static CameraShake instance; // ½Ì±ÛÅæ
+    private CinemachineImpulseSource impulseSource; // ÀÓÆÞ½º ¼Ò½º °´Ã¼
+
+    void Awake()
+    {
+        instance = this;
+        impulseSource = GetComponent<CinemachineImpulseSource>(); // ÀÓÆÞ½º ¼Ò½º ÄÄÆ÷³ÍÆ®
+    }
+
+    // Ä«¸Þ¶ó Èçµé±â
+    public void Shake()
+    {
+        if (impulseSource != null)
+        {
+            // ±âº» ¼³Á¤À¸·Î ÀÓÆÞ½º »ý¼º
+            impulseSource.GenerateImpulse();
+        }
+    }
+}

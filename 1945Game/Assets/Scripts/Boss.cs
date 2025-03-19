@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -11,7 +12,6 @@ public class Boss : MonoBehaviour
     public Transform pos1;
     public Transform pos2;
 
-
     void Start()
     {
         Invoke("Hide", 3); // 3ÃÊ µÚ ÅØ½ºÆ® ¼û±è
@@ -23,6 +23,9 @@ public class Boss : MonoBehaviour
     void Hide()
     {
         GameObject.Find("TextBossWarning").SetActive(false);
+
+        //// Ä«¸Þ¶ó Èçµé±â
+        //CameraShake.instance.ShowShake();
     }
 
     IEnumerator Shoot()

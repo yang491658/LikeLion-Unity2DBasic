@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     // 싱글톤이라는 디자인 패턴을 사용
     public static GameManager instance;
     public Text scoreText; // 점수를 표시하는 Text 객체를 에디터에서 받아옴
-    public Text startText; //게임 시작 전 카운트 3, 2, 1
+    public Text startText; // 게임 시작 전 카운트 3, 2, 1
     int score = 0;
 
     private void Awake()

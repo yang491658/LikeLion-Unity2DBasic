@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //// 화면 경계 충돌 로직
+        //// 화면 경계 충돌 : 월드 좌표 기준
         //// 카메라 변수
         //Camera cam = Camera.main;
         //// 화면 기준 좌표를 월드 기준으로 변환
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 
         transform.Translate(moveX, moveY, 0);
 
-        //// 화면 경계 충돌 로직
+        //// 화면 경계 충돌 : 월드 좌표 기준
         //// 새로운 위치 = 현재 위치 + 이동량
         //Vector3 newPosition = transform.position + new Vector3(moveX, moveY, 0);
         //// 경계를 벗어나지 않도록 위치 제한
@@ -105,8 +105,8 @@ public class Player : MonoBehaviour
         //// 새로운 위치 업데이트
         //transform.position = newPosition;
 
-        // 화면 경계 충돌
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position); // 캐릭터 월드 좌표 -> 뷰토프 좌표계 변환
+        // 화면 경계 충돌 : Viewport 기준
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position); // 캐릭터 월드 좌표 -> 뷰포트 좌표계 변환
         viewPos.x = Mathf.Clamp01(viewPos.x); // x값을 0 이상, 1 이하로 제한
         viewPos.y = Mathf.Clamp01(viewPos.y); // y값을 0 이상, 1 이하로 제한
         Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos); // 다시 월드 좌표 변환

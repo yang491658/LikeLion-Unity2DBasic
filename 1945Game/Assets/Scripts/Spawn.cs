@@ -8,7 +8,7 @@ public class Spawn : MonoBehaviour
     public float maxX = 2f;
     // 몬스터 스폰 시간 (시작/중지)
     public float start = 1f;
-    public float stop = 10f;
+    public float stop = 5f;
     // 몬스터 생성 여부
     bool swi = true;
     bool swi2 = true;
@@ -31,7 +31,7 @@ public class Spawn : MonoBehaviour
     {
         // 코루틴 시작
         StartCoroutine(RandomSpawn());
-        // 10초 뒤 몬스터 스폰 중지
+        // 5초 뒤 몬스터 스폰 중지
         Invoke("Stop", stop);
     }
 
@@ -80,8 +80,8 @@ public class Spawn : MonoBehaviour
         // 두번째 코루틴
         StartCoroutine(RandomSpawn2());
 
-        // 30초 뒤 몬스터2 스폰 중지
-        Invoke("Stop2", stop + 20);
+        // 10초 뒤 몬스터2 스폰 중지
+        Invoke("Stop2", stop * 2);
     }
 
     void Stop2()
@@ -92,8 +92,22 @@ public class Spawn : MonoBehaviour
         // 보스 출현 텍스트
         textBossWarning.SetActive(true);
 
+        // 카메라 흔들기
+        StartCoroutine("Shake");
+
         // 보스 생성
         Vector3 pos = new Vector3(0, 3, 0);
         GameObject go = Instantiate(boss, pos, Quaternion.identity);
+    }
+
+    // 카메라 흔들기
+    IEnumerator Shake()
+    {
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.Shake();
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.Shake();
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.Shake();
     }
 }

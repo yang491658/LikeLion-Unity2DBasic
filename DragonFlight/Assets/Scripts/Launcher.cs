@@ -15,7 +15,7 @@ public class Launcher : MonoBehaviour
         // Instantiate(미사일 프리팹, 런쳐포지션, 방향없음)
         Instantiate(bullet, transform.position, Quaternion.identity);
 
-        // 사운드 사용 : 사운드 매니저에서 총 사운드
+        // 사운드 사용 : 사운드 매니저에서 총알 사운드
         SoundManager.instance.PlayBulletSound();
     }
 
