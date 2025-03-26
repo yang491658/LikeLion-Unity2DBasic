@@ -4,14 +4,11 @@ public class Lazer : MonoBehaviour
 {
     float speed = 50f; // 속도
     float angle; // 각도
+    Vector2 MousePos; // 마우스 위치
+    Vector3 dir; // 방향
+    Vector3 dirNo; // 단위 벡터
 
     Transform pTr; // 플레이어의 트랜스폼
-
-    Vector2 MousePos; // 마우스 위치
-
-    // 방향
-    Vector3 dir;
-    Vector3 dirNo;
 
     void Start()
     {
