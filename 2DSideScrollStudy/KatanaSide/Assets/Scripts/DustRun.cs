@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class DustRun : MonoBehaviour
 {
@@ -6,7 +6,7 @@ public class DustRun : MonoBehaviour
 
     private void Awake()
     {
-        // ¸ÕÁö Á¦°Å
+        // ë¨¼ì§€ ì œê±°
         Destroy(gameObject, lifeTime);
     }
 }

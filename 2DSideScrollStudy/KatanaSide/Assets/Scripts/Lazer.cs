@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Lazer : MonoBehaviour
 {
-    float speed = 50f; // ¼Óµµ
-    float angle; // °¢µµ
-    Vector2 MousePos; // ¸¶¿ì½º À§Ä¡
-    Vector3 dir; // ¹æÇâ
-    Vector3 dirNo; // ´ÜÀ§ º¤ÅÍ
+    float speed = 50f; // ì†ë„
+    float angle; // ê°ë„
+    Vector2 MousePos; // ë§ˆìš°ìŠ¤ ìœ„ì¹˜
+    Vector3 dir; // ë°©í–¥
+    Vector3 dirNo; // ë‹¨ìœ„ ë²¡í„°
 
-    Transform pTr; // ÇÃ·¹ÀÌ¾îÀÇ Æ®·£½ºÆû
+    Transform pTr; // í”Œë ˆì´ì–´ì˜ íŠ¸ëœìŠ¤í¼
 
     void Start()
     {
@@ -18,22 +18,22 @@ public class Lazer : MonoBehaviour
         MousePos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector3 Pos = new Vector3(MousePos.x, MousePos.y, 0);
 
-        dir = Pos - pTr.position; // ÇÃ·¹ÀÌ¾î¿¡¼­ ¸¶¿ì½º¸¦ ÇâÇÏ´Â º¤ÅÍ
-        dirNo = new Vector3(dir.x, dir.y, 0).normalized; // ´ÜÀ§ º¤ÅÍ
+        dir = Pos - pTr.position; // í”Œë ˆì´ì–´ì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ í–¥í•˜ëŠ” ë²¡í„°
+        dirNo = new Vector3(dir.x, dir.y, 0).normalized; // ë‹¨ìœ„ ë²¡í„°
 
-        // °¢µµ °è»ê
+        // ê°ë„ ê³„ì‚°
         angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        // È¸Àü Àû¿ë
+        // íšŒì „ ì ìš©
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        // ·¹ÀÌÀú Á¦°Å
+        // ë ˆì´ì € ì œê±°
         Destroy(gameObject, 4f);
     }
 
     void Update()
     {
-        // ·¹ÀÌÀú ÀÌµ¿
+        // ë ˆì´ì € ì´ë™
         //transform.position += Vector3.right * speed * Time.deltaTime;
         transform.position += dirNo * speed * Time.deltaTime;
     }

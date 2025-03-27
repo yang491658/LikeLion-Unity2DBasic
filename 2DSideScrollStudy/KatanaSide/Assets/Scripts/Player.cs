@@ -1,42 +1,42 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("ÇÃ·¹ÀÌ¾î ¼Ó¼º")]
-    public float speed = 5; // ¼Óµµ
-    public float jump = 8; // Á¡ÇÁ·Â
-    public float power = 5; // ÆÄ¿ö
-    public Vector3 direction; // ¹æÇâ
+    [Header("í”Œë ˆì´ì–´ ì†ì„±")]
+    public float speed = 5; // ì†ë„
+    public float jump = 8; // ì í”„ë ¥
+    public float power = 5; // íŒŒì›Œ
+    public Vector3 direction; // ë°©í–¥
 
-    public GameObject slash; // ½½·¡½¬
-    public GameObject shadow; // ±×¸²ÀÚ
-    List<GameObject> shadowList = new List<GameObject>(); // ±×¸²ÀÚ ¹è¿­
-    public GameObject lazer; // ·¹ÀÌÀú
-    public GameObject dustRun; // ´Ş¸®±â ¸ÕÁö
-    public GameObject dustJump; // Á¡ÇÁ ¸ÕÁö
-    public GameObject dustWall; // º®Á¡ÇÁ ¸ÕÁö
+    public GameObject slash; // ìŠ¬ë˜ì‰¬
+    public GameObject shadow; // ê·¸ë¦¼ì
+    List<GameObject> shadowList = new List<GameObject>(); // ê·¸ë¦¼ì ë°°ì—´
+    public GameObject lazer; // ë ˆì´ì €
+    public GameObject dustRun; // ë‹¬ë¦¬ê¸° ë¨¼ì§€
+    public GameObject dustJump; // ì í”„ ë¨¼ì§€
+    public GameObject dustWall; // ë²½ì í”„ ë¨¼ì§€
 
-    // º®Àâ±â
-    bool isWall; // º® À¯¹«
-    public Transform wallCheck; // º® À§Ä¡
-    public float wallDistance = 0.5f; // º®°úÀÇ °Å¸®
-    public LayerMask wallLayer; // º® ·¹ÀÌ¾î
+    // ë²½ì¡ê¸°
+    bool isWall; // ë²½ ìœ ë¬´
+    public Transform wallCheck; // ë²½ ìœ„ì¹˜
+    public float wallDistance = 0.5f; // ë²½ê³¼ì˜ ê±°ë¦¬
+    public LayerMask wallLayer; // ë²½ ë ˆì´ì–´
 
-    // º®Á¡ÇÁ
-    public bool wallJumping; // º® Á¡ÇÁ »óÅÂ
-    public float slidingSpeed = 0.8f; // ³«ÇÏ ¼Óµµ
-    float isRight = 1; // º® Àâ±â ¹æÇâ
+    // ë²½ì í”„
+    public bool wallJumping; // ë²½ ì í”„ ìƒíƒœ
+    public float slidingSpeed = 0.8f; // ë‚™í•˜ ì†ë„
+    float isRight = 1; // ë²½ ì¡ê¸° ë°©í–¥
 
-    Animator ani; // ¾Ö´Ï¸ŞÀÌÅÍ
-    Rigidbody2D rb; // ¸®Áöµå¹Ùµğ
-    SpriteRenderer sr; // ½ºÇÁ¶óÀÌÆ® ·»´õ·¯
+    Animator ani; // ì• ë‹ˆë©”ì´í„°
+    Rigidbody2D rb; // ë¦¬ì§€ë“œë°”ë””
+    SpriteRenderer sr; // ìŠ¤í”„ë¼ì´íŠ¸ ë Œë”ëŸ¬
 
     void Start()
     {
         direction = Vector2.zero;
 
-        // °¢°¢ÀÇ ÄÄÆ÷³ÍÆ®
+        // ê°ê°ì˜ ì»´í¬ë„ŒíŠ¸
         ani = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
@@ -46,41 +46,41 @@ public class Player : MonoBehaviour
     {
         if (!isWall && !wallJumping)
         {
-            InputKey(); // Å° ÀÔ·Â ÇÔ¼ö ½ÇÇà
-            Move();// ÀÌµ¿ ÇÔ¼ö ½ÇÇà
+            InputKey(); // í‚¤ ì…ë ¥ í•¨ìˆ˜ ì‹¤í–‰
+            Move();// ì´ë™ í•¨ìˆ˜ ì‹¤í–‰
         }
 
-        // º® À¯¹« È®ÀÎ
+        // ë²½ ìœ ë¬´ í™•ì¸
         isWall = Physics2D.Raycast(wallCheck.position, Vector2.right * isRight, wallDistance, wallLayer);
         ani.SetBool("Grab", isWall);
 
-        if (Input.GetKeyDown(KeyCode.W)) // WÅ° ÀÔ·Â
+        if (Input.GetKeyDown(KeyCode.W)) // Wí‚¤ ì…ë ¥
         {
             if (ani.GetBool("Jump") == false)
             {
-                Jump(); // Á¡ÇÁ ÇÔ¼ö ½ÇÇà
+                Jump(); // ì í”„ í•¨ìˆ˜ ì‹¤í–‰
                 ani.SetBool("Jump", true);
             }
         }
 
         if (isWall)
         {
-            // ÇÃ·¹ÀÌ¾î º®Àâ±â
+            // í”Œë ˆì´ì–´ ë²½ì¡ê¸°
             wallJumping = false;
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * slidingSpeed);
 
-            // º®Á¡ÇÁ
-            if (Input.GetKeyDown(KeyCode.W)) // WÅ° ÀÔ·Â
+            // ë²½ì í”„
+            if (Input.GetKeyDown(KeyCode.W)) // Wí‚¤ ì…ë ¥
             {
                 wallJumping = true;
 
-                // Àâ±â ÇÔ¼ö ½ÇÇà
+                // ì¡ê¸° í•¨ìˆ˜ ì‹¤í–‰
                 Invoke("Grab", 0.3f);
 
-                // ÇÃ·¹ÀÌ¾î º®Á¡ÇÁ
+                // í”Œë ˆì´ì–´ ë²½ì í”„
                 rb.linearVelocity = new Vector2(-isRight * jump, 0.9f * jump);
 
-                DustJump(); // Á¡ÇÁ ¸ÕÁö ÇÔ¼ö ½ÇÇà
+                DustJump(); // ì í”„ ë¨¼ì§€ í•¨ìˆ˜ ì‹¤í–‰
 
                 sr.flipX = !sr.flipX;
                 isRight = -isRight;
@@ -88,68 +88,68 @@ public class Player : MonoBehaviour
         }
     }
 
-    void InputKey() // ¹æÇâÅ° ÀÔ·Â ÇÔ¼ö
+    void InputKey() // ë°©í–¥í‚¤ ì…ë ¥ í•¨ìˆ˜
     {
-        direction.x = Input.GetAxisRaw("Horizontal"); // A/SÅ° ¶Ç´Â ÁÂ¿ì ¹æÇâÅ° ÀÔ·Â
+        direction.x = Input.GetAxisRaw("Horizontal"); // A/Sí‚¤ ë˜ëŠ” ì¢Œìš° ë°©í–¥í‚¤ ì…ë ¥
 
-        // ÇÃ·¹ÀÌ¾î ¸ğ½À º¯°æ
-        if (direction.x < 0) // ¿ŞÂÊ ¹æÇâÅ°
+        // í”Œë ˆì´ì–´ ëª¨ìŠµ ë³€ê²½
+        if (direction.x < 0) // ì™¼ìª½ ë°©í–¥í‚¤
         {
-            sr.flipX = true; // ÇÃ·¹ÀÌ¾î ¹æÇâ ÀüÈ¯
+            sr.flipX = true; // í”Œë ˆì´ì–´ ë°©í–¥ ì „í™˜
             ani.SetBool("Run", true);
 
             for (int i = 0; i < shadowList.Count; i++)
             {
-                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // ±×¸²ÀÚ ¹æÇâ ÀüÈ¯
+                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // ê·¸ë¦¼ì ë°©í–¥ ì „í™˜
             }
         }
-        else if (direction.x > 0) // ¿À¸¥ÂÊ ¹æÇâÅ°
+        else if (direction.x > 0) // ì˜¤ë¥¸ìª½ ë°©í–¥í‚¤
         {
-            sr.flipX = false; // ÇÃ·¹ÀÌ¾î ¹æÇâ ÀüÈ¯
+            sr.flipX = false; // í”Œë ˆì´ì–´ ë°©í–¥ ì „í™˜
             ani.SetBool("Run", true);
 
             for (int i = 0; i < shadowList.Count; i++)
             {
-                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // ±×¸²ÀÚ ¹æÇâ ÀüÈ¯
+                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // ê·¸ë¦¼ì ë°©í–¥ ì „í™˜
             }
         }
-        else if (direction.x == 0) // Á¤Áö (ÀÔ·Â ¾øÀ½)
+        else if (direction.x == 0) // ì •ì§€ (ì…ë ¥ ì—†ìŒ)
         {
             ani.SetBool("Run", false);
 
-            // ±×¸²ÀÚ Á¦°Å
+            // ê·¸ë¦¼ì ì œê±°
             for (int i = 0; i < shadowList.Count; i++)
             {
-                Destroy(shadowList[i]); // ±×¸²ÀÚ Á¦°Å 
-                shadowList.RemoveAt(i); // ¸®½ºÆ® ³»¿¡¼­ ±×¸²ÀÚ Á¦°Å
+                Destroy(shadowList[i]); // ê·¸ë¦¼ì ì œê±° 
+                shadowList.RemoveAt(i); // ë¦¬ìŠ¤íŠ¸ ë‚´ì—ì„œ ê·¸ë¦¼ì ì œê±°
             }
         }
 
-        if (Input.GetMouseButtonDown(0)) // ¸¶¿ì½º ÁÂÅ¬¸¯
+        if (Input.GetMouseButtonDown(0)) // ë§ˆìš°ìŠ¤ ì¢Œí´ë¦­
         {
             ani.SetTrigger("Attack");
 
-            // ·¹ÀÌÀú »ı¼º
+            // ë ˆì´ì € ìƒì„±
             Instantiate(lazer, transform.position, Quaternion.identity);
         }
     }
 
-    public void Move() // ÀÌµ¿ ÇÔ¼ö
+    public void Move() // ì´ë™ í•¨ìˆ˜
     {
-        // ÇÃ·¹ÀÌÀÌ ÀÌµ¿
+        // í”Œë ˆì´ì´ ì´ë™
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    public void Jump() // Á¡ÇÁ ÇÔ¼ö
+    public void Jump() // ì í”„ í•¨ìˆ˜
     {
-        // ÇÃ·¹ÀÌÀÌ Á¡ÇÁ
+        // í”Œë ˆì´ì´ ì í”„
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
 
-        DustJump(); // Á¡ÇÁ ¸ÕÁö ÇÔ¼ö ½ÇÇà
+        DustJump(); // ì í”„ ë¨¼ì§€ í•¨ìˆ˜ ì‹¤í–‰
     }
 
-    void Grab() // Àâ±â ÇÔ¼ö
+    void Grab() // ì¡ê¸° í•¨ìˆ˜
     {
         wallJumping = false;
     }
@@ -161,18 +161,18 @@ public class Player : MonoBehaviour
         RaycastHit2D rayHit
             = Physics2D.Raycast(rb.position, Vector3.down, 1, LayerMask.GetMask("Ground"));
 
-        if (rb.linearVelocityY < 0) // ÇÏ°­ Áß
+        if (rb.linearVelocityY < 0) // í•˜ê°• ì¤‘
         {
-            if (rayHit.collider != null) // ¿ÀºêÁ§Æ®ÀÇ Äİ¶óÀÌ´õ Á¢ÃË
+            if (rayHit.collider != null) // ì˜¤ë¸Œì íŠ¸ì˜ ì½œë¼ì´ë” ì ‘ì´‰
             {
-                if (rayHit.distance < 0.7f) // °Å¸® ÃøÁ¤
+                if (rayHit.distance < 0.7f) // ê±°ë¦¬ ì¸¡ì •
                 {
                     ani.SetBool("Jump", false);
                 }
             }
             else
             {
-                if (isWall) // º® Àâ±â »óÅÂ
+                if (isWall) // ë²½ ì¡ê¸° ìƒíƒœ
                 {
                     ani.SetBool("Grab", true);
 
@@ -185,55 +185,55 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Slash() // ½½·¡½¬ ÇÔ¼ö
+    public void Slash() // ìŠ¬ë˜ì‰¬ í•¨ìˆ˜
     {
-        //// ÇÃ·¹ÀÌ¾î ½½·¡½¬ »ı¼º
+        //// í”Œë ˆì´ì–´ ìŠ¬ë˜ì‰¬ ìƒì„±
         //Instantiate(slash, transform.position, Quaternion.identity);
 
-        // ¹æÇâ¿¡ µû¸¥ ÇÃ·¹ÀÌ¾î ½½·¡½¬(°ø°İ ÀÌÆåÆ®) »ı¼º
-        if (sr.flipX == false) // ÇÃ·¹ÀÌ¾î ¹æÇâ ¿À¸¥ÂÊ
+        // ë°©í–¥ì— ë”°ë¥¸ í”Œë ˆì´ì–´ ìŠ¬ë˜ì‰¬(ê³µê²© ì´í™íŠ¸) ìƒì„±
+        if (sr.flipX == false) // í”Œë ˆì´ì–´ ë°©í–¥ ì˜¤ë¥¸ìª½
         {
-            rb.AddForce(Vector2.right * power, ForceMode2D.Impulse); // ÇÃ·¹ÀÌ¾î ÀÌµ¿
-            GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // ½½·¡½¬ »ı¼º
-            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ½½·¡½¬ ¹æÇâ ÀüÈ¯
+            rb.AddForce(Vector2.right * power, ForceMode2D.Impulse); // í”Œë ˆì´ì–´ ì´ë™
+            GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // ìŠ¬ë˜ì‰¬ ìƒì„±
+            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ìŠ¬ë˜ì‰¬ ë°©í–¥ ì „í™˜
 
         }
-        else // ÇÃ·¹ÀÌ¾î ¹æÇâ ¿ŞÂÊ
+        else // í”Œë ˆì´ì–´ ë°©í–¥ ì™¼ìª½
         {
-            rb.AddForce(Vector2.left * power, ForceMode2D.Impulse); // ÇÃ·¹ÀÌ¾î ÀÌµ¿
-            GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // ½½·¡½¬ »ı¼º
-            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ½½·¡½¬ ¹æÇâ ÀüÈ¯
+            rb.AddForce(Vector2.left * power, ForceMode2D.Impulse); // í”Œë ˆì´ì–´ ì´ë™
+            GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // ìŠ¬ë˜ì‰¬ ìƒì„±
+            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ìŠ¬ë˜ì‰¬ ë°©í–¥ ì „í™˜
         }
     }
 
-    public void Shadow() // ±×¸²ÀÚ ÇÔ¼ö
+    public void Shadow() // ê·¸ë¦¼ì í•¨ìˆ˜
     {
         if (shadowList.Count < 6)
         {
-            GameObject go = Instantiate(shadow, transform.position, Quaternion.identity); // ±×¸²ÀÚ »ı¼º
-            go.GetComponent<Shadow>().speed = 10 - shadowList.Count; // ±×¸²ÀÚ ¼Óµµ °¨¼Ò
+            GameObject go = Instantiate(shadow, transform.position, Quaternion.identity); // ê·¸ë¦¼ì ìƒì„±
+            go.GetComponent<Shadow>().speed = 10 - shadowList.Count; // ê·¸ë¦¼ì ì†ë„ ê°ì†Œ
             shadowList.Add(go);
         }
     }
 
-    public void DustRun(GameObject dustRun) // ´Ş¸®±â ¸ÕÁö ÇÔ¼ö
+    public void DustRun(GameObject dustRun) // ë‹¬ë¦¬ê¸° ë¨¼ì§€ í•¨ìˆ˜
     {
-        // ´Ş¸¯±â ¸ÕÁö »ı¼º
+        // ë‹¬ë¦­ê¸° ë¨¼ì§€ ìƒì„±
         Instantiate(dustRun, transform.position + new Vector3(0f, -0.35f, 0f), Quaternion.identity);
     }
 
-    public void DustJump() // Á¡ÇÁ ¸ÕÁö ÇÔ¼ö
+    public void DustJump() // ì í”„ ë¨¼ì§€ í•¨ìˆ˜
     {
         if (!isWall)
         {
-            // Á¡ÇÁ ¸ÕÁö »ı¼º
+            // ì í”„ ë¨¼ì§€ ìƒì„±
             Instantiate(dustJump, transform.position, Quaternion.identity);
         }
         else
         {
-            // º®Á¡ÇÁ ¸ÕÁö »ı¼º
+            // ë²½ì í”„ ë¨¼ì§€ ìƒì„±
             GameObject go = Instantiate(dustWall, transform.position + new Vector3(0.8f * isRight, 0, 0), Quaternion.identity);
-            go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ¹÷Á¡ÇÁ ¸ÕÁö ¹æÈ¯ ÀüÈ¯
+            go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // ë²…ì í”„ ë¨¼ì§€ ë°©í™˜ ì „í™˜
         }
     }
 }

@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Slash : MonoBehaviour
 {
-    float angle; // °¢µµ
-    //public Vector3 direction = Vector3.right; // ¹æÇâ
-    Vector3 direction; // ¹æÇâ
-    Vector2 MousePos; // ¸¶¿ì½º À§Ä¡
+    float angle; // ê°ë„
+    //public Vector3 direction = Vector3.right; // ë°©í–¥
+    Vector3 direction; // ë°©í–¥
+    Vector2 MousePos; // ë§ˆìš°ìŠ¤ ìœ„ì¹˜
 
-    private GameObject player; // ÇÃ·¹ÀÌ¾î
+    private GameObject player; // í”Œë ˆì´ì–´
 
     void Start()
     {
@@ -18,19 +18,19 @@ public class Slash : MonoBehaviour
         MousePos = Camera.main.ScreenToWorldPoint(MousePos);
         Vector3 Pos = new Vector3(MousePos.x, MousePos.y, 0);
 
-        direction = Pos - tr.position; // ÇÃ·¹ÀÌ¾î¿¡¼­ ¸¶¿ì½º¸¦ ÇâÇÏ´Â º¤ÅÍ
+        direction = Pos - tr.position; // í”Œë ˆì´ì–´ì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ í–¥í•˜ëŠ” ë²¡í„°
 
-        // °¢µµ °è»ê
+        // ê°ë„ ê³„ì‚°
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
     }
 
     void Update()
     {
-        transform.position = player.transform.position; // ½½·¡½¬ À§Ä¡
-        transform.rotation = Quaternion.Euler(0f, 0f, angle); // ½½·¡½¬ È¸Àü
+        transform.position = player.transform.position; // ìŠ¬ë˜ì‰¬ ìœ„ì¹˜
+        transform.rotation = Quaternion.Euler(0f, 0f, angle); // ìŠ¬ë˜ì‰¬ íšŒì „
     }
 
-    public void Destr() // ÀÌÆåÆ® Á¦°Å ÇÔ¼ö
+    public void Destr() // ì´í™íŠ¸ ì œê±° í•¨ìˆ˜
     {
         Destroy(gameObject);
     }

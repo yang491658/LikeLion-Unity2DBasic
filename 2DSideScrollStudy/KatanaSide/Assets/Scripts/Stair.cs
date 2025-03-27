@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Stair : MonoBehaviour
 {
-    public GameObject player; // ÇÃ·¹ÀÌ¾î
+    public GameObject player; // í”Œë ˆì´ì–´
 
-    // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹
+    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -13,7 +13,7 @@ public class Stair : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ ÇØÁ¦
+    // í”Œë ˆì´ì–´ì™€ ì¶©ëŒ í•´ì œ
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")

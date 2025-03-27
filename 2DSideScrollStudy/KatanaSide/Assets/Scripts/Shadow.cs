@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Shadow : MonoBehaviour
 {
-    public float speed = 10; // ¼Óµµ
+    public float speed = 10; // ì†ë„
 
-    private GameObject player; // ÇÃ·¹ÀÌ¾î
+    private GameObject player; // í”Œë ˆì´ì–´
 
     void Update()
     {
