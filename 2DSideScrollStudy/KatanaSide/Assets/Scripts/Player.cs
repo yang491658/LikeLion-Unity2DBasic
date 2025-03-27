@@ -9,31 +9,23 @@ public class Player : MonoBehaviour
     public float power = 5; // 파워
     public Vector3 direction; // 방향
 
-    // 슬래쉬
-    public GameObject slash;
+    public GameObject slash; // 슬래쉬
+    public GameObject shadow; // 그림자
+    List<GameObject> shadowList = new List<GameObject>(); // 그림자 배열
+    public GameObject lazer; // 레이저
+    public GameObject dustRun; // 달리기 먼지
+    public GameObject dustJump; // 점프 먼지
+    public GameObject dustWall; // 벽점프 먼지
 
-    // 그림자
-    public GameObject shadow;
-    List<GameObject> shadowList = new List<GameObject>();
-
-    // 레이저
-    public GameObject lazer;
-
-    // 달리기 먼지
-    public GameObject dustRun;
-
-    // 점프 먼지
-    public GameObject dustJump;
-
-    // 벽 점프 확인
+    // 벽잡기
     bool isWall; // 벽 유무
     public Transform wallCheck; // 벽 위치
     public float wallDistance = 0.5f; // 벽과의 거리
     public LayerMask wallLayer; // 벽 레이어
 
-    // 벽 점프 변수
-    public float slidingSpeed = 0.8f; // 낙하 속도
+    // 벽점프
     public bool wallJumping; // 벽 점프 상태
+    public float slidingSpeed = 0.8f; // 낙하 속도
     float isRight = 1; // 벽 잡기 방향
 
     Animator ani; // 애니메이터
@@ -52,10 +44,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!wallJumping)
+        if (!isWall && !wallJumping)
         {
             InputKey(); // 키 입력 함수 실행
-            Move();// 이동 함수 실행 (벽 점프 중이 아닐 때)
+            Move();// 이동 함수 실행
         }
 
         // 벽 유무 확인
@@ -73,11 +65,11 @@ public class Player : MonoBehaviour
 
         if (isWall)
         {
-            // 벽 잡기
+            // 플레이어 벽잡기
             wallJumping = false;
             rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * slidingSpeed);
 
-            // 벽 잡기 중 점프
+            // 벽점프
             if (Input.GetKeyDown(KeyCode.W)) // W키 입력
             {
                 wallJumping = true;
@@ -85,10 +77,11 @@ public class Player : MonoBehaviour
                 // 잡기 함수 실행
                 Invoke("Grab", 0.3f);
 
-                // 벽 점프
+                // 플레이어 벽점프
                 rb.linearVelocity = new Vector2(-isRight * jump, 0.9f * jump);
 
-                // 방향 전환
+                DustJump(); // 점프 먼지 함수 실행
+
                 sr.flipX = !sr.flipX;
                 isRight = -isRight;
             }
@@ -102,24 +95,22 @@ public class Player : MonoBehaviour
         // 플레이어 모습 변경
         if (direction.x < 0) // 왼쪽 방향키
         {
-            sr.flipX = true;
+            sr.flipX = true; // 플레이어 방향 전환
             ani.SetBool("Run", true);
 
-            // 그림자 방향 변경
             for (int i = 0; i < shadowList.Count; i++)
             {
-                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX;
+                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // 그림자 방향 전환
             }
         }
         else if (direction.x > 0) // 오른쪽 방향키
         {
-            sr.flipX = false;
+            sr.flipX = false; // 플레이어 방향 전환
             ani.SetBool("Run", true);
 
-            // 그림자 방향 변경
             for (int i = 0; i < shadowList.Count; i++)
             {
-                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX;
+                shadowList[i].GetComponent<SpriteRenderer>().flipX = sr.flipX; // 그림자 방향 전환
             }
         }
         else if (direction.x == 0) // 정지 (입력 없음)
@@ -179,6 +170,18 @@ public class Player : MonoBehaviour
                     ani.SetBool("Jump", false);
                 }
             }
+            else
+            {
+                if (isWall) // 벽 잡기 상태
+                {
+                    ani.SetBool("Grab", true);
+
+                }
+                else
+                {
+                    ani.SetBool("Jump", true);
+                }
+            }
         }
     }
 
@@ -192,14 +195,14 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector2.right * power, ForceMode2D.Impulse); // 플레이어 이동
             GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // 슬래쉬 생성
-            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 슬래쉬 방향 오른쪽
+            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 슬래쉬 방향 전환
 
         }
         else // 플레이어 방향 왼쪽
         {
             rb.AddForce(Vector2.left * power, ForceMode2D.Impulse); // 플레이어 이동
             GameObject go = Instantiate(slash, transform.position, Quaternion.identity); // 슬래쉬 생성
-            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 슬래쉬 방향 왼쪽
+            //go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 슬래쉬 방향 전환
         }
     }
 
@@ -221,7 +224,16 @@ public class Player : MonoBehaviour
 
     public void DustJump() // 점프 먼지 함수
     {
-        // 점프 먼지 생성
-        Instantiate(dustJump, transform.position, Quaternion.identity);
+        if (!isWall)
+        {
+            // 점프 먼지 생성
+            Instantiate(dustJump, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            // 벽점프 먼지 생성
+            GameObject go = Instantiate(dustWall, transform.position + new Vector3(0.8f * isRight, 0, 0), Quaternion.identity);
+            go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 벅점프 먼지 방환 전환
+        }
     }
 }
