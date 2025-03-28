@@ -34,4 +34,25 @@ public class Slash : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    // 적의 미사일과 충돌
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<EnemyMissile>() != null)
+        {
+            // 미사일 정보
+            EnemyMissile missile = collision.gameObject.GetComponent<EnemyMissile>();
+            SpriteRenderer missileSr = collision.gameObject.GetComponent<SpriteRenderer>();
+
+            // 미사일 방향 전환
+            Vector2 reverseDir = -missile.GetDirection();
+            missile.SetDirection(reverseDir);
+
+            // 미사일 모습 변경
+            if (missileSr != null)
+            {
+                missileSr.flipX = !missileSr.flipX;
+            }
+        }
+    }
 }

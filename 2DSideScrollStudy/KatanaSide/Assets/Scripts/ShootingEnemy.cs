@@ -1,25 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ShootingEnemy : MonoBehaviour
 {
-    [Header("Àû Ä³¸¯ÅÍ ¼Ó¼º")]
-    public float detectionRange = 10f; // ÇÃ·¹ÀÌ¾î °¨Áö °Å¸®
-    public float shootingInterval = 2f; // ¹ß»ç ´ë±â ½Ã°£
-    public GameObject missile; // ¹Ì»çÀÏ
+    [Header("ì  ìºë¦­í„° ì†ì„±")]
+    public float detectionRange = 10f; // í”Œë ˆì´ì–´ ê°ì§€ ê±°ë¦¬
+    public float shootingInterval = 2f; // ë°œì‚¬ ëŒ€ê¸° ì‹œê°„
+    public GameObject missile; // ë¯¸ì‚¬ì¼
 
-    [Header("ÂüÁ¶ ÄÄÆ÷³ÍÆ®")]
-    private Transform player; // ÇÃ·¹ÀÌ¾î À§Ä¡
-    public Transform firePoint; // ¹Ì»çÀÏ ¹ß»ç À§Ä¡
-    private float shootTimer; // ¹ß»ç Å¸ÀÌ¸Ó
+    [Header("ì°¸ì¡° ì»´í¬ë„ŒíŠ¸")]
+    private Transform player; // í”Œë ˆì´ì–´ ìœ„ì¹˜
+    public Transform firePoint; // ë¯¸ì‚¬ì¼ ë°œì‚¬ ìœ„ì¹˜
+    private float shootTimer; // ë°œì‚¬ íƒ€ì´ë¨¸
     private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        // ÄÄÆ÷³ÍÆ®
+        // ì»´í¬ë„ŒíŠ¸
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        shootTimer = shootingInterval; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+        shootTimer = shootingInterval; // íƒ€ì´ë¨¸ ì´ˆê¸°í™”
     }
 
 
@@ -27,38 +27,39 @@ public class ShootingEnemy : MonoBehaviour
     {
         if (player == null) return;
 
-        // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸® °è»ê
+        // í”Œë ˆì´ì–´ì™€ì˜ ê±°ë¦¬ ê³„ì‚°
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
         {
-            // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î ½ºÇÁ¶óÀÌÆ® È¸Àü
+            // í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ ìŠ¤í”„ë¼ì´íŠ¸ íšŒì „
             spriteRenderer.flipX = (player.position.x < transform.position.x);
 
-            // ¹Ì»çÀÏ ¹ß»ç
-            shootTimer -= Time.deltaTime;   //Å¸ÀÌ¸Ó °¨¼Ò
+            // ë¯¸ì‚¬ì¼ ë°œì‚¬
+            shootTimer -= Time.deltaTime;   //íƒ€ì´ë¨¸ ê°ì†Œ
 
             if (shootTimer <= 0)
             {
-                Shoot(); // ¹Ì»çÀÏ ¹ß»ç ÇÔ¼ö ½ÇÇà
-                shootTimer = shootingInterval; // Å¸ÀÌ¸Ó ¸®¼Â
+                Shoot(); // ë¯¸ì‚¬ì¼ ë°œì‚¬ í•¨ìˆ˜ ì‹¤í–‰
+                shootTimer = shootingInterval; // íƒ€ì´ë¨¸ ë¦¬ì…‹
             }
 
         }
     }
 
-    // ¹Ì»çÀÏ ¹ß»ç ÇÔ¼ö
+    // ë¯¸ì‚¬ì¼ ë°œì‚¬ í•¨ìˆ˜
     void Shoot()
     {
-        // ¹Ì»çÀÏ »ı¼º
+        // ë¯¸ì‚¬ì¼ ìƒì„±
         GameObject go= Instantiate(missile, firePoint.position, Quaternion.identity);
 
-        // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î ¹ß»ç ¹æÇâ ÀüÈ¯
+        // í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ ë°œì‚¬ ë°©í–¥ ì „í™˜
         Vector2 direction = (player.position - firePoint.position).normalized;
-        go.GetComponent<EnemyMissile>().SetDirection(direction); // ¹Ì»çÀÏ ¹æÇâ ÀüÈ¯
+        go.GetComponent<EnemyMissile>().SetDirection(direction); // ë¯¸ì‚¬ì¼ ì´ë™ ë°©í–¥
+        go.GetComponent<SpriteRenderer>().flipX = (player.position.x < transform.position.x); // ë¯¸ì‚¬ì¼ ë°©í–¥ ì „í™˜
     }
 
-    // µğ¹ö±ë¿ë ±âÁî¸ğ
+    // ë””ë²„ê¹…ìš© ê¸°ì¦ˆëª¨
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

@@ -1,15 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemyMissile : MonoBehaviour
 {
-    public float speed = 5f; // ¼Óµµ
-    public float lifeTime = 3f; // »ıÁ¸ ½Ã°£
-    public int damage = 10; // µ¥¹ÌÁö
-    public Vector2 direction; // ¹æÇâ
-    
+    public float speed = 5f; // ì†ë„
+    public float lifeTime = 3f; // ìƒì¡´ ì‹œê°„
+    public int damage = 10; // ë°ë¯¸ì§€
+    //public Vector2 direction; // ë°©í–¥
+    private Vector2 direction; // ë°©í–¥
+
     void Start()
     {
-        // ÀÏÁ¤ ½Ã°£ ÈÄ ¹Ì»çÀÏ Á¦°Å
+        // ì¼ì • ì‹œê°„ í›„ ë¯¸ì‚¬ì¼ ì œê±°
         Destroy(gameObject, lifeTime);
     }
 
@@ -18,18 +19,23 @@ public class EnemyMissile : MonoBehaviour
         direction = dir.normalized;
     }
 
+    public Vector2 GetDirection()
+    {
+        return direction;
+    }
+
     void Update()
     {
-        // ¹Ì»çÀÏ ÀÌµ¿
+        // ë¯¸ì‚¬ì¼ ì´ë™
         transform.Translate(direction * speed * Time.deltaTime);
     }
 
-    // ÇÃ·¹ÀÌ¾î Ãæµ¹
+    // í”Œë ˆì´ì–´ ì¶©ëŒ
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            // ¹Ì»çÀÏ Á¦°Å
+            // ë¯¸ì‚¬ì¼ ì œê±°
             Destroy(gameObject);
         }
     }

@@ -154,33 +154,36 @@ public class Player : MonoBehaviour
         wallJumping = false;
     }
 
+    private const float checkDistance = 0.7f; // 점프 가능 거리
+
     private void FixedUpdate()
     {
         Debug.DrawRay(rb.position, Vector3.down, new Color(0, 1, 0));
 
         RaycastHit2D rayHit
-            = Physics2D.Raycast(rb.position, Vector3.down, 1, LayerMask.GetMask("Ground"));
+            = Physics2D.Raycast(rb.position, Vector3.down, checkDistance, LayerMask.GetMask("Ground"));
 
-        if (rb.linearVelocityY < 0) // 하강 중
+        CheckGround(rayHit);
+    }
+
+    void CheckGround(RaycastHit2D rayHit)
+    {
+        bool isGround = rayHit.collider != null && rayHit.distance < checkDistance;
+
+        if (isGround) // 오브젝트의 콜라이더 접촉
         {
-            if (rayHit.collider != null) // 오브젝트의 콜라이더 접촉
+            ani.SetBool("Jump", false);
+        }
+        else
+        {
+            if (isWall) // 벽 잡기 상태
             {
-                if (rayHit.distance < 0.7f) // 거리 측정
-                {
-                    ani.SetBool("Jump", false);
-                }
+                ani.SetBool("Grab", true);
+
             }
             else
             {
-                if (isWall) // 벽 잡기 상태
-                {
-                    ani.SetBool("Grab", true);
-
-                }
-                else
-                {
-                    ani.SetBool("Jump", true);
-                }
+                ani.SetBool("Jump", true);
             }
         }
     }
