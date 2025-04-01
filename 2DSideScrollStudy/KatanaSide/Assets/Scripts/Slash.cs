@@ -54,5 +54,16 @@ public class Slash : MonoBehaviour
                 missileSr.flipX = !missileSr.flipX;
             }
         }
+
+        // 적 처치
+        if (collision.CompareTag("Enemy"))
+        {
+            // 적 처치 시 사망 애니메이션 재생
+            ShootingEnemy enemy = collision.GetComponent<ShootingEnemy>();
+            if (enemy!= null)
+            {
+                enemy.Death();
+            }
+        }
     }
 }

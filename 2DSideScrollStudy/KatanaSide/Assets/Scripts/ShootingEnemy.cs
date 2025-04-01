@@ -12,12 +12,14 @@ public class ShootingEnemy : MonoBehaviour
     public Transform firePoint; // 미사일 발사 위치
     private float shootTimer; // 발사 타이머
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     void Start()
     {
         // 컴포넌트
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator= GetComponent<Animator>();
 
         shootTimer = shootingInterval; // 타이머 초기화
     }
@@ -64,5 +66,14 @@ public class ShootingEnemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+    // 캐릭터 사망 함수
+    public void Death()
+    {
+        animator.SetBool("Death", true);
+
+        // 애니메이션 종류 후 오브젝트 제거
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 }

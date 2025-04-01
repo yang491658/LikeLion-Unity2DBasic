@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -44,6 +45,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // 시간 조절 입력 체크 ( Shift키 입력 시 슬로우 모션 시작)
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            // 포스트 프로세싱 화면 효과
+            TimeControler.Instance.SetSlowMotion(true);
+        }
+
         if (!isWall && !wallJumping)
         {
             InputKey(); // 키 입력 함수 실행
@@ -237,6 +245,16 @@ public class Player : MonoBehaviour
             // 벽점프 먼지 생성
             GameObject go = Instantiate(dustWall, transform.position + new Vector3(0.8f * isRight, 0, 0), Quaternion.identity);
             go.GetComponent<SpriteRenderer>().flipX = sr.flipX; // 벅점프 먼지 방환 전환
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 보스 포탈과 충돌
+        if (collision.CompareTag("BossScene"))
+        {
+            // 보스 씬으로 전환
+            SceneManager.LoadScene("Boss");
         }
     }
 }

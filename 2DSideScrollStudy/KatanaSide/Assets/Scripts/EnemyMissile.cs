@@ -26,15 +26,31 @@ public class EnemyMissile : MonoBehaviour
 
     void Update()
     {
+        // 슬로우 모션 적용
+        float timeScale = TimeControler.Instance.GetTimeScale();
+
         // 미사일 이동
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime * timeScale);
     }
 
-    // 플레이어 충돌
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // 플레이어 충돌
         if (collision.CompareTag("Player"))
         {
+            // 미사일 제거
+            Destroy(gameObject);
+        }
+        // 적 충돌 (적 처치)
+        else if (collision.CompareTag("Enemy"))
+        {
+            // 적 처치 시 사망 애니메이션 재생
+            ShootingEnemy enemy = collision.GetComponent<ShootingEnemy>();
+            if (enemy != null)
+            {
+                enemy.Death();
+            }
+
             // 미사일 제거
             Destroy(gameObject);
         }
