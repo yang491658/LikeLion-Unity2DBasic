@@ -10,7 +10,7 @@ public enum EnemyType
 }
 
 // 모든 적의 기본 인터페이스
-public interface Enemy
+public interface IEnemy
 {
     void Initialize(Vector3 position);
     void Attack();
@@ -18,7 +18,7 @@ public interface Enemy
 }
 
 // 기본 적 클래스
-public abstract class EnemyBase : MonoBehaviour, Enemy
+public abstract class EnemyBase : MonoBehaviour, IEnemy
 {
     public float health;
     public float speed;

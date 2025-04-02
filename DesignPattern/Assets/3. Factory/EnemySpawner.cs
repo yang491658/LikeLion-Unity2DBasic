@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         EnemyType randomType = (EnemyType)Random.Range(0, 4);
 
         // 팩토리를 사용하여 적 생성
-        Enemy enemy = EnemyFactory.Instance.CreateEnemy(randomType, spawnPosition);
+        IEnemy enemy = EnemyFactory.Instance.CreateEnemy(randomType, spawnPosition);
 
         Debug.Log($"{randomType} 적이 {spawnPosition}에 생성되었습니다.");
     }

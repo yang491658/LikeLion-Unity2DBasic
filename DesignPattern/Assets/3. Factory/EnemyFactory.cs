@@ -37,7 +37,7 @@ public class EnemyFactory : MonoBehaviour
     }
 
     // 利 积己 皋辑靛
-    public Enemy CreateEnemy(EnemyType type, Vector3 position)
+    public IEnemy CreateEnemy(EnemyType type, Vector3 position)
     {
         GameObject enemyObject = null;
 
@@ -62,7 +62,7 @@ public class EnemyFactory : MonoBehaviour
         }
 
         // 积己等 利 檬扁拳
-        Enemy enemy = enemyObject.GetComponent<Enemy>();
+        IEnemy enemy = enemyObject.GetComponent<IEnemy>();
         enemy.Initialize(position);
         return enemy;
     }
