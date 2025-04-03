@@ -22,8 +22,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashSpeed; // 대쉬 속도
     [SerializeField] private float dashDuration; // 대쉬 지속 시간
     private float dashTimer; // 대쉬 발동 타이머
-    [SerializeField] private float dashCooldown; // 대쉬 쿨타임
+    [SerializeField] private float dashCoolTime; // 대쉬 쿨타임
     private float dashCooldownTimer; // 대쉬 쿨타임 타이머
+
+    [Header("공격 정보")]
+    [SerializeField] private float comboTime = 0.3f; // 콤보 지속 시간
+    private bool attack; // 공격 여부
+    private int combo; // 콤보
+    private float comboTimer; // 콤보 타이머
 
     private void Start()
     {
@@ -42,6 +48,9 @@ public class Player : MonoBehaviour
         dashTimer -= Time.deltaTime;
         dashCooldownTimer -= Time.deltaTime;
 
+        // 콤보 타이머
+        comboTimer -= Time.deltaTime;
+
         AnimationControl(); // 플레이어 이동 모션
     }
 
@@ -56,24 +65,19 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
 
         // 플레이어 대쉬
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            CanDash();
-        }
-    }
+        if (Input.GetKeyDown(KeyCode.LeftShift)) CanDash();
 
-    private void CanDash() // 대쉬 가능
-    {
-        if (dashCooldownTimer < 0)
-        {
-            dashTimer = dashDuration;
-            dashCooldownTimer = dashCooldown;
-        }
+        // 플레이어 공격
+        if (Input.GetKeyDown(KeyCode.Mouse0)) Attack();
     }
 
     private void Move() // 이동 및 대쉬
     {
-        if (dashTimer > 0)
+        if (attack)
+        {
+            rb.linearVelocity = new Vector2(0, 0);
+        }
+        else if (dashTimer > 0)
         {
             rb.linearVelocity = new Vector2(xInput * dashSpeed, rb.linearVelocityY);
         }
@@ -119,6 +123,36 @@ public class Player : MonoBehaviour
         isGround = Physics2D.Raycast(transform.position, Vector2.down, distance, ground);
     }
 
+
+    private void CanDash() // 대쉬 가능
+    {
+        if (dashCooldownTimer < 0 && !attack)
+        {
+            dashTimer = dashDuration;
+            dashCooldownTimer = dashCoolTime;
+        }
+    }
+
+    private void Attack() // 공격
+    {
+        if (!isGround) return; // 공격 불가능
+
+        if (comboTimer < 0) combo = 0; // 콤보 초기화
+
+        attack = true;
+
+        comboTimer = comboTime;
+    }
+
+    public void AttackOver() // 공격 종료
+    {
+        attack = false;
+
+        combo++; // 콤보 상승
+
+        if (combo > 2) combo = 0; // 콤보 초기화
+    }
+
     private void AnimationControl() // 애니메이션 컨트롤
     {
         // 이동 모션
@@ -131,5 +165,9 @@ public class Player : MonoBehaviour
 
         // 대쉬 모션
         ani.SetBool("Dash", dashTimer > 0);
+
+        // 공격 모션
+        ani.SetBool("Attack", attack);
+        ani.SetInteger("Combo", combo);
     }
 }
