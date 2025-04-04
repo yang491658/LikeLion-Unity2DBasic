@@ -1,22 +1,12 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    private Rigidbody2D rb; // 리지드바디
-    private Animator ani; // 애니메이터
-
     private float xInput;
 
+    [Header("이동 정보")]
     [SerializeField] private float speed; // 속도
     [SerializeField] private float jump; // 점프력
-
-    private int dircetion = 1; // 방향
-    private bool isRight = true;
-
-    [Header("충돌 정보")]
-    [SerializeField] private float distance; // 충돌 감지 거리
-    [SerializeField] private LayerMask ground;
-    private bool isGround; // 충돌 여부
 
     [Header("대쉬 정보")]
     [SerializeField] private float dashSpeed; // 대쉬 속도
@@ -31,18 +21,18 @@ public class Player : MonoBehaviour
     private int combo; // 콤보
     private float comboTimer; // 콤보 타이머
 
-    private void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        ani = GetComponentInChildren<Animator>();
+        base.Start();
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         InputKey(); // 키 입력
         Move(); // 플레이어 이동
         FlipControl(); // 플레이어 이동 중 방향 전환
-        CollisionCheck(); // 충돌 체크
 
         // 대쉬 타이머
         dashTimer -= Time.deltaTime;
@@ -87,13 +77,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Flip() // 방향 전환
-    {
-        dircetion = dircetion * -1;
-        isRight = !isRight;
-        transform.Rotate(0, 180, 0);
-    }
-
     private void FlipControl() // 방향 전환 컨트롤
     {
         if (rb.linearVelocityX > 0 && !isRight)
@@ -110,19 +93,6 @@ public class Player : MonoBehaviour
     {
         if (isGround) rb.linearVelocity = new Vector2(rb.linearVelocity.x, jump);
     }
-
-    private void OnDrawGizmos() // 기즈모 그리기
-    {
-        Gizmos.DrawLine(transform.position,
-            new Vector3(transform.position.x,
-            transform.position.y - distance));
-    }
-
-    private void CollisionCheck() // 충돌 감지
-    {
-        isGround = Physics2D.Raycast(transform.position, Vector2.down, distance, ground);
-    }
-
 
     private void CanDash() // 대쉬 가능
     {
@@ -169,5 +139,10 @@ public class Player : MonoBehaviour
         // 공격 모션
         ani.SetBool("Attack", attack);
         ani.SetInteger("Combo", combo);
+    }
+
+    protected override void CollisionCheck()
+    {
+        base.CollisionCheck();
     }
 }
