@@ -1,0 +1,61 @@
+﻿item_id,item_name,attack_power,defense
+11001,Sword,10,0
+12001,Sword,20,0
+13001,Sword,30,0
+14001,Sword,40,0
+15001,Sword,50,0
+11002,Ax,20,0
+12002,Ax,30,0
+13002,Ax,40,0
+14002,Ax,50,0
+15002,Ax,60,0
+21001,Wooden Shield ,0,10
+22001,Wooden Shield ,0,20
+23001,Wooden Shield ,0,30
+24001,Wooden Shield ,0,40
+25001,Wooden Shield ,0,50
+21002,Metal Shield,0,20
+22002,Metal Shield,0,30
+23002,Metal Shield,0,40
+24002,Metal Shield,0,50
+25002,Metal Shield,0,60
+31001,Wooden Chest Armor,10,10
+32001,Wooden Chest Armor,20,20
+33001,Wooden Chest Armor,30,30
+34001,Wooden Chest Armor,40,40
+35001,Wooden Chest Armor,50,50
+31002,Metal Chest Armor,30,30
+32002,Metal Chest Armor,40,40
+33002,Metal Chest Armor,50,50
+34002,Metal Chest Armor,60,60
+35002,Metal Chest Armor,70,70
+41001,Leather Gloves,10,10
+42001,Leather Gloves,20,20
+43001,Leather Gloves,30,30
+44001,Leather Gloves,40,40
+45001,Leather Gloves,50,50
+41002,Plate Gauntlets,20,20
+42002,Plate Gauntlets,30,30
+43002,Plate Gauntlets,40,40
+44002,Plate Gauntlets,50,50
+45002,Plate Gauntlets,60,60
+51001,Light Boots,10,10
+52001,Light Boots,20,20
+53001,Light Boots,30,30
+54001,Light Boots,40,40
+55001,Light Boots,50,50
+51002,Heavy Boots,20,20
+52002,Heavy Boots,30,30
+53002,Heavy Boots,40,40
+54002,Heavy Boots,50,50
+55002,Heavy Boots,60,60
+61001,Ring of Protection,0,10
+62001,Ring of Protection,0,20
+63001,Ring of Protection,0,30
+64001,Ring of Protection,0,40
+65001,Ring of Protection,0,50
+61002,Ring of Strength,10,10
+62002,Ring of Strength,20,20
+63002,Ring of Strength,30,30
+64002,Ring of Strength,40,40
+65002,Ring of Strength,50,50

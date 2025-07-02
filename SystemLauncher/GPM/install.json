@@ -1,0 +1,33 @@
+{
+    "installs": [
+        {
+            "name": "Common",
+            "version": "2.4.0",
+            "dependency": []
+        },
+        {
+            "name": "CacheStorage",
+            "version": "1.4.0",
+            "dependency": [
+                "Common"
+            ]
+        },
+        {
+            "name": "UI",
+            "version": "2.11.0",
+            "dependency": [
+                "Common",
+                "CacheStorage"
+            ]
+        },
+        {
+            "name": "LogViewer",
+            "version": "2.1.0",
+            "dependency": [
+                "Common",
+                "UI",
+                "CacheStorage"
+            ]
+        }
+    ]
+}
